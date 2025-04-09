@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .result-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .feature-card {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+        .plot-img {
+            width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+        .gait-state {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .walking { color: #28a745; }
+        .running { color: #007bff; }
+        .upstairs { color: #6f42c1; }
+        .downstairs { color: #fd7e14; }
+        .unstable { color: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="result-container">
+            <h2 class="text-center mb-4">Gait Analysis Results</h2>
+            
+            <!-- Gait State Recognition Result -->
+            <div class="text-center mb-4">
+                <h4>Gait State Recognition</h4>
+                <div class="gait-state {{ gait_state|lower }}">
+                    {{ gait_state }}
+                </div>
+            </div>
+            
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="feature-card">
+                        <h5>Cadence</h5>
+                        <p class="fs-4">{{ "%.1f"|format(features['cadence']) }} steps/min</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="feature-card">
+                        <h5>Walking Speed</h5>
+                        <p class="fs-4">{{ "%.2f"|format(walking_speed) }} m/s ({{ "%.2f"|format(walking_speed_kmh) }} km/h)</p>
+                        <small class="text-muted">Based on {{ "%.2f"|format(stride_length) }}m average stride length</small>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Plot Images -->
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="mb-3">Vertical Acceleration Analysis</h4>
+                    <img src="data:image/png;base64,{{ plots['acceleration_plot'] }}" class="plot-img" alt="Acceleration Plot">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="mb-3">Step Interval Analysis</h4>
+                    <img src="data:image/png;base64,{{ plots['interval_plot'] }}" class="plot-img" alt="Interval Plot">
+                </div>
+                <div class="col-md-6">
+                    <h4 class="mb-3">Frequency Spectrum</h4>
+                    <img src="data:image/png;base64,{{ plots['spectrum_plot'] }}" class="plot-img" alt="Spectrum Plot">
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="/" class="btn btn-primary">Analyze New File</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
