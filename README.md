@@ -1,4 +1,4 @@
-# CMPT 353 Gait Analysis Project by Zhiyu Mao, Ke Wang, Brandon Yang.  
+# CMPT 353 Gait Analysis Project 
 
 ## Project Description  
 This project is designed for analyzing human gait patterns using acceleration data. It allows users to upload CSV files containing sensor data (typically from accelerometers) and train machine learning models to classify different gait activities such as walking, running, and stair climbing. The application provides a simple web interface powered by Flask, and it uses various data preprocessing and feature extraction techniques to build and evaluate classification models.  
